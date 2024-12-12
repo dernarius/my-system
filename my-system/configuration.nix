@@ -47,6 +47,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Enable audio
+  services.pipewire.enable = false;
   hardware.pulseaudio.enable = true;
 
   # List packages installed in system profile. To search, run:
@@ -100,6 +101,8 @@
     # languages
     cargo
     gcc
+    python312
+    python312Packages.pip
     rustc
     zig
     zsh

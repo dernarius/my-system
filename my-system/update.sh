@@ -11,4 +11,5 @@ cd $SCRIPT_DIR
 
 cp ./configuration.nix /etc/nixos/configuration.nix
 
+# export NIXPKGS_ALLOW_BROKEN=1
 nixos-rebuild switch
