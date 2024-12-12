@@ -45,6 +45,10 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  boot.loader.systemd-boot.configurationLimit = 5;
+  nix.gc.automatic = true;
+  nix.gc.dates = "daily";
+  nix.gc.options = "--delete-older-than 7d";
 
   # Enable audio
   services.pipewire.enable = false;
