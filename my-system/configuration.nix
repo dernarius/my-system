@@ -160,6 +160,8 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
+  services.blueman.enable = true;
+
   services.gnome.gnome-keyring.enable = true;
 
   services.avahi.enable = true;
