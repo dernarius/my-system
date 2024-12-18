@@ -101,6 +101,8 @@ exec --no-startup-id pa-notify -t 2
 
     bindsym $mod+u input type:keyboard xkb_layout us
     bindsym $mod+i input type:keyboard xkb_layout lt
+
+    bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
 #
 # Top bar buttons
 #
