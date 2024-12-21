@@ -39,7 +39,7 @@
   users.users.stk = {
     isNormalUser = true;
     description = "Stanislovas";
-    extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" "plugdev" ];
     packages = with pkgs; [];
     shell = pkgs.zsh;
   };
