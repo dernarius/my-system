@@ -39,7 +39,7 @@
   users.users.stk = {
     isNormalUser = true;
     description = "Stanislovas";
-    extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" "plugdev" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" "plugdev" "dialout" ];
     packages = with pkgs; [];
     shell = pkgs.zsh;
   };
@@ -68,6 +68,7 @@
     powertop
     light
     docker-compose
+    unzip
     
     # sway/wayland utils
     grim
@@ -103,13 +104,13 @@
     discord
     thunderbird
     vlc
+    postman
 
     # languages
-    cargo
     gcc
     python312
     python312Packages.pip
-    rustc
+    rustup
     zig
     zsh
 
@@ -211,7 +212,7 @@
   virtualisation.docker.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 6969 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
