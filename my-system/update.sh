@@ -9,6 +9,8 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 cd $SCRIPT_DIR
 
+nix-channel --update
+
 cp ./configuration.nix /etc/nixos/configuration.nix
 
 # export NIXPKGS_ALLOW_BROKEN=1

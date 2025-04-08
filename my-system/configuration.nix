@@ -69,6 +69,9 @@
     light
     docker-compose
     unzip
+    fastfetch
+    ncdu
+    duplicity
     
     # sway/wayland utils
     grim
@@ -100,11 +103,15 @@
     # applications
     alacritty
     alacritty-theme
+    calibre
     git
+    deluge
     discord
+    onlyoffice-bin
     thunderbird
     vlc
     postman
+    inkscape
 
     # languages
     gcc
@@ -120,6 +127,8 @@
 
   fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "Monofur" ]; })
+    corefonts
+    vistafonts
   ];
 
   programs.zsh.enable = true;
@@ -150,18 +159,24 @@
 
   programs.wshowkeys.enable = true;
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  systemd.timers."my-backup" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "30 minutes";
+      OnUnitActiveSec = "30 minutes";
+      Unit = "my-backup.service";
+    };
+  };
 
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  systemd.services."my-backup" = {
+    script = ''
+      ${pkgs.duplicity}/bin/duplicity backup --no-encryption --exclude /home/stk/.cache --exclude /home/stk/.mozilla /home/stk scp://girlboss//mnt/newtent/pupa
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      User = "stk";
+    };
+  };
 
   services.blueman.enable = true;
 
@@ -212,7 +227,10 @@
   virtualisation.docker.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 6969 ];
+  networking.firewall.allowedTCPPorts = [ 
+    6969 8000 8080  # development stuff
+  ];
+
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
