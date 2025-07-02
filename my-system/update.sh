@@ -12,6 +12,7 @@ cd $SCRIPT_DIR
 nix-channel --update
 
 cp ./configuration.nix /etc/nixos/configuration.nix
+cp ./hardware-configuration.nix /etc/nixos/hardware-configuration.nix
 
 # export NIXPKGS_ALLOW_BROKEN=1
 nixos-rebuild switch

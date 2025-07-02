@@ -54,7 +54,7 @@
 
   # Enable audio
   services.pipewire.enable = false;
-  hardware.pulseaudio.enable = true;
+  services.pulseaudio.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -72,6 +72,12 @@
     fastfetch
     ncdu
     duplicity
+    imagemagick
+    gst_all_1.gstreamer
+    gst_all_1.icamerasrc-ipu6
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-bad
+    v4l2-relayd
     
     # sway/wayland utils
     grim
@@ -92,13 +98,11 @@
     # utils
     curl
     fd
+    gnumake
     playerctl
     wget
-    gst_all_1.gstreamer
-    gst_all_1.icamerasrc-ipu6
-    gst_all_1.gst-plugins-good
-    gst_all_1.gst-plugins-bad
-    v4l2-relayd
+    nomacs
+    tesseract
 
     # applications
     alacritty
@@ -112,8 +116,11 @@
     vlc
     postman
     inkscape
+    vivaldi
+    obs-studio
 
     # languages
+    clang
     gcc
     python312
     python312Packages.pip
@@ -126,7 +133,7 @@
   ];
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "Monofur" ]; })
+    nerd-fonts.monofur
     corefonts
     vistafonts
   ];
@@ -191,6 +198,7 @@
   services.tumbler.enable = true;
 
   services.tailscale.enable = true;
+  services.tailscale.useRoutingFeatures = "client";
 
   services.keyd = {
     enable = true;
