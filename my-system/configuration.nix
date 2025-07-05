@@ -120,8 +120,11 @@
     obs-studio
 
     # languages
+    stylua
+    lua-language-server
     clang
     gcc
+    nixd
     python312
     python312Packages.pip
     rustup

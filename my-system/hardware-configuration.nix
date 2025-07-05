@@ -55,10 +55,18 @@
   services.hardware.bolt.enable = true;
 
   # services.logind.lidSwitch = "suspend-then-hibernate";
-  services.logind.lidSwitch = "suspend";
+  services.logind.lidSwitch = "sleep";
   # systemd.sleep.extraConfig = "HibernateDelaySec=1h";
 
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
   '';
+
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+    };
+  };
 }
