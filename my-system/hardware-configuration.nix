@@ -11,7 +11,8 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "v4l2loopback" ];
-  boot.extraModulePackages = [ ];
+  boot.extraModulePackages = [ pkgs.linuxPackages.v4l2loopback ];
+  boot.extraModprobeConfig = "options v4l2loopback nr_devices=0";
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/5b513cb6-46c9-4b43-8017-6a3179f3f31b";
@@ -60,6 +61,18 @@
 
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
+    SUBSYSTEM!="video4linux", GOTO="hide_cam_end"
+    #ATTR{name}=="Intel MIPI Camera", GOTO="hide_cam_end"
+    ATTR{name}!="Dummy video device (0x0000)", GOTO="hide_cam_end"
+    ACTION=="add", RUN+="${pkgs.coreutils}/bin/mkdir -p /dev/not-for-user"
+    ACTION=="add", RUN+="${pkgs.coreutils}/bin/mv -f $env{DEVNAME} /dev/not-for-user/"
+    # Since we skip these rules for the mipi, we do not need to link it back to /dev
+    # ACTION=="add", ATTR{name}!="Intel MIPI Camera", RUN+="${pkgs.coreutils}/bin/ln -fs $name /dev/not-for-user/$env{ID_SERIAL}"
+
+    ACTION=="remove", RUN+="${pkgs.coreutils}/bin/rm -f /dev/not-for-user/$name"
+    ACTION=="remove", RUN+="${pkgs.coreutils}/bin/rm -f /dev/not-for-user/$env{ID_SERIAL}"
+
+    LABEL="hide_cam_end"
   '';
 
   services.tlp = {

@@ -118,6 +118,8 @@
     inkscape
     vivaldi
     obs-studio
+    acpica-tools
+
 
     # languages
     stylua
