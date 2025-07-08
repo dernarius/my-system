@@ -8,10 +8,11 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
+  boot.kernelPackages = pkgs.linuxPackages_6_15;
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "v4l2loopback" ];
-  boot.extraModulePackages = [ pkgs.linuxPackages.v4l2loopback ];
+  boot.extraModulePackages = [ pkgs.linuxPackages_6_15.v4l2loopback ];
   boot.extraModprobeConfig = "options v4l2loopback nr_devices=0";
 
   fileSystems."/" =
@@ -50,8 +51,8 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 
-  hardware.ipu6.enable = true;
-  hardware.ipu6.platform = "ipu6ep";
+  # hardware.ipu6.enable = true;
+  # hardware.ipu6.platform = "ipu6ep";
 
   services.hardware.bolt.enable = true;
 

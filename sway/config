@@ -216,7 +216,7 @@ set $mode_system (l)ock, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
     bindsym l exec swaylock -d, mode "default"
     bindsym s exec swaylock -d, exec systemctl suspend, mode "default"
-    bindsym h exec swaylock -d, exec systemctl hibernate, mode "default"
+    bindsym h exec systemctl hibernate, mode "default"
     bindsym r exec systemctl reboot, mode "default"
     bindsym Shift+s exec systemctl poweroff, mode "default"
 
