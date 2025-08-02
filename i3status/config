@@ -1,7 +1,7 @@
 general {
 	interval = 1
 	colors = true
-	separator = ""
+	separator = " "
 }
 
 order += "battery 0"
@@ -12,5 +12,5 @@ battery 0 {
 }
 
 tztime local {
-        format = "%Y-%m-%d %H:%M:%S"
+  format = "%Y-%m-%d %H:%M:%S"
 }

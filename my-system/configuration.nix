@@ -86,6 +86,7 @@
     mako
     i3status
     rofi-wayland
+    wshowkeys
 
     # audio
     alsa-tools
@@ -96,6 +97,7 @@
     pasystray
     
     # utils
+    jq
     curl
     fd
     gnumake
@@ -119,7 +121,6 @@
     vivaldi
     obs-studio
     acpica-tools
-
 
     # languages
     stylua

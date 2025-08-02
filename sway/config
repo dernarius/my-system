@@ -20,7 +20,7 @@ set $term alacritty
 # on the original workspace that the command was run on.
 set $menu rofi -show drun
 
-font "Monofur Nerd Font 13"
+font "Monofur Nerd Font 14"
 
 workspace_auto_back_and_forth yes
 
@@ -69,6 +69,11 @@ input "1267:12866:VEN_04F3:00_04F3:3242_Touchpad" {
     tap_button_map lrm
 }
 
+input type:keyboard {
+  xkb_layout us,lt
+  xkb_options grp:lwin_toggle
+}
+
 ### Additional programs
 
 exec --no-startup-id pa-notify -t 2
@@ -99,8 +104,8 @@ exec --no-startup-id pa-notify -t 2
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
-    bindsym $mod+u input type:keyboard xkb_layout us
-    bindsym $mod+i input type:keyboard xkb_layout lt
+    # bindsym $mod+u input type:keyboard xkb_layout us
+    # bindsym $mod+i input type:keyboard xkb_layout lt
 
     bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
 #
@@ -258,7 +263,7 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command i3status
+    status_command ~/.config/i3status/final.sh
 
     colors {
         statusline #ffffffff
