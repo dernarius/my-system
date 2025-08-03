@@ -131,6 +131,7 @@
     python312
     python312Packages.pip
     rustup
+    uv
     zig
     zsh
 

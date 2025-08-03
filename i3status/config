@@ -8,7 +8,7 @@ order += "battery 0"
 order += "tztime local"
 
 battery 0 {
-	format = "%percentage"
+	format = "%percentage (%emptytime)"
 }
 
 tztime local {
