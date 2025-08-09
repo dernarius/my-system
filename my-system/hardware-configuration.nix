@@ -56,7 +56,8 @@
 
   services.fprintd.enable = true;
   # services.logind.lidSwitch = "suspend-then-hibernate";
-  services.logind.lidSwitch = "sleep";
+  services.logind.lidSwitch = "suspend";
+  services.logind.powerKey = "suspend";
   # systemd.sleep.extraConfig = "HibernateDelaySec=1h";
 
   services.tlp = {

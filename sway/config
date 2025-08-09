@@ -47,6 +47,8 @@ output * bg /home/stk/wallpaper-jr.jpg fill
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
+exec swayidle -w \
+         before-sleep 'swaylock -fF -i /home/stk/wallpaper-luckystar.jpg'
 
 ### Input configuration
 #
@@ -219,8 +221,8 @@ exec --no-startup-id pa-notify -t 2
 #
 set $mode_system (l)ock, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec swaylock -d, mode "default"
-    bindsym s exec swaylock -d, exec systemctl suspend, mode "default"
+    bindsym l exec swaylock -fF -i /home/stk/wallpaper-luckystar.jpg, mode "default"
+    bindsym s exec systemctl suspend, mode "default"
     bindsym h exec systemctl hibernate, mode "default"
     bindsym r exec systemctl reboot, mode "default"
     bindsym Shift+s exec systemctl poweroff, mode "default"

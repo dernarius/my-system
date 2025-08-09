@@ -86,6 +86,7 @@
     mako
     i3status
     rofi-wayland
+    swayidle
     wshowkeys
 
     # audio
@@ -191,6 +192,16 @@
       User = "stk";
     };
   };
+
+  # services.swayidle = {
+  #   enable = true;
+  #   events = [
+  #     {
+  #       event = "before-sleep";
+  #       command = "${pkgs.swaylock}/bin/swaylock -k";
+  #     }
+  #   ];
+  # };
 
   services.blueman.enable = true;
 
