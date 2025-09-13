@@ -8,7 +8,7 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.kernelPackages = pkgs.linuxPackages_6_15;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
@@ -55,10 +55,15 @@
   services.hardware.bolt.enable = true;
 
   services.fprintd.enable = true;
-  # services.logind.lidSwitch = "suspend-then-hibernate";
-  services.logind.lidSwitch = "suspend";
-  services.logind.powerKey = "suspend";
-  # systemd.sleep.extraConfig = "HibernateDelaySec=1h";
+
+  services.upower.enable = true;
+  services.upower.criticalPowerAction = "Hibernate";
+
+  services.logind.lidSwitch = "suspend-then-hibernate";
+  services.logind.powerKey = "suspend-then-hibernate";
+  systemd.sleep.extraConfig = "HibernateDelaySec=1h\nHibernateOnACPower=false";
+  # services.logind.lidSwitch = "suspend";
+  # services.logind.powerKey = "suspend";
 
   services.tlp = {
     enable = true;

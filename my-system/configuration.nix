@@ -53,85 +53,84 @@
   nix.gc.options = "--delete-older-than 7d";
 
   # Enable audio
-  services.pipewire.enable = false;
-  services.pulseaudio.enable = true;
+  services.pipewire.enable = true;
+  services.pulseaudio.enable = false;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # system utils
-    v4l-utils
+    docker-compose
+    duplicity
+    fastfetch
+    imagemagick
+    light
+    ncdu
     powertop
-    usbutils
+    powertop
     udiskie
     udisks
-    powertop
-    light
-    docker-compose
     unzip
-    fastfetch
-    ncdu
-    duplicity
-    imagemagick
-    gst_all_1.gstreamer
-    gst_all_1.icamerasrc-ipu6
-    gst_all_1.gst-plugins-good
-    gst_all_1.gst-plugins-bad
+    usbutils
+    v4l-utils
     v4l2-relayd
     
     # sway/wayland utils
     grim
-    slurp
-    wl-clipboard
-    mako
     i3status
+    mako
     rofi-wayland
+    slurp
     swayidle
+    wl-clipboard
     wshowkeys
 
     # audio
     alsa-tools
     alsa-utils
-    pavucontrol
     pa-notify
     pamixer
     pasystray
+    pavucontrol
     
     # utils
-    jq
     curl
     fd
     gnumake
-    playerctl
-    wget
+    jq
     nomacs
+    playerctl
     tesseract
+    tree
+    wget
 
     # applications
+    abcde
+    acpica-tools
     alacritty
     alacritty-theme
     calibre
-    git
     deluge
     discord
+    freecad
+    git
+    inkscape
+    kicad
+    obs-studio
     onlyoffice-bin
+    postman
     thunderbird
     vlc
-    postman
-    inkscape
-    vivaldi
-    obs-studio
-    acpica-tools
 
     # languages
-    stylua
-    lua-language-server
     clang
     gcc
+    lua-language-server
     nixd
     python312
     python312Packages.pip
     rustup
+    stylua
     uv
     zig
     zsh
