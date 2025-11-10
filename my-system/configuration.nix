@@ -67,7 +67,6 @@
     light
     ncdu
     powertop
-    powertop
     udiskie
     udisks
     unzip
@@ -98,6 +97,7 @@
     fd
     gnumake
     jq
+    just
     nomacs
     playerctl
     tesseract
@@ -123,6 +123,7 @@
     vlc
 
     # languages
+    bun
     clang
     gcc
     lua-language-server
