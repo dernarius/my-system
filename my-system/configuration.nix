@@ -143,7 +143,7 @@
   fonts.packages = with pkgs; [
     nerd-fonts.monofur
     corefonts
-    vistafonts
+    vista-fonts
   ];
 
   programs.zsh = {

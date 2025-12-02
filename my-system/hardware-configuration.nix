@@ -59,8 +59,8 @@
   services.upower.enable = true;
   services.upower.criticalPowerAction = "Hibernate";
 
-  services.logind.lidSwitch = "suspend-then-hibernate";
-  services.logind.powerKey = "suspend-then-hibernate";
+  services.logind.settings.Login.HandleLidSwitch = "suspend-then-hibernate";
+  services.logind.settings.Login.HanldePowerKey = "suspend-then-hibernate";
   systemd.sleep.extraConfig = "HibernateDelaySec=1h\nHibernateOnACPower=false";
   # services.logind.lidSwitch = "suspend";
   # services.logind.powerKey = "suspend";
