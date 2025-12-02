@@ -9,10 +9,9 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 cd $SCRIPT_DIR
 
-nix-channel --update
+echo "starting update"
 
-cp ./configuration.nix /etc/nixos/configuration.nix
-cp ./hardware-configuration.nix /etc/nixos/hardware-configuration.nix
+nix flake update
 
 # export NIXPKGS_ALLOW_BROKEN=1
-nixos-rebuild switch
+nixos-rebuild switch --flake .#girlboss

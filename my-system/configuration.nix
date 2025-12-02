@@ -5,15 +5,12 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
 
   # Bootloader.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.initrd.kernelModules = [ "i915" ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -51,6 +48,7 @@
   nix.gc.automatic = true;
   nix.gc.dates = "daily";
   nix.gc.options = "--delete-older-than 7d";
+  nix.settings.secret-key-files = [ "/etc/nix/signing-key.sec" ];
 
   # Enable audio
   services.pipewire.enable = true;
@@ -78,7 +76,7 @@
     grim
     i3status
     mako
-    rofi-wayland
+    rofi
     slurp
     swayidle
     wl-clipboard
@@ -118,7 +116,9 @@
     kicad
     obs-studio
     onlyoffice-bin
+    pinentry-all
     postman
+    trayscale
     thunderbird
     vlc
 
@@ -146,7 +146,9 @@
     vistafonts
   ];
 
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+  };
 
   programs.sway = {
     enable = true;
@@ -174,34 +176,33 @@
 
   programs.wshowkeys.enable = true;
 
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-curses;
+    enableSSHSupport = true;
+  };
+
   systemd.timers."my-backup" = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      OnBootSec = "30 minutes";
-      OnUnitActiveSec = "30 minutes";
+      OnBootSec = "2 hours";
+      OnUnitActiveSec = "2 hours";
       Unit = "my-backup.service";
     };
   };
 
   systemd.services."my-backup" = {
     script = ''
-      ${pkgs.duplicity}/bin/duplicity backup --no-encryption --exclude /home/stk/.cache --exclude /home/stk/.mozilla /home/stk scp://girlboss//mnt/newtent/pupa
+      ${pkgs.duplicity}/bin/duplicity backup --encrypt-sign-key F1D15517 --exclude /home/stk/.cache --exclude /home/stk/.mozilla /home/stk scp://girlboss//mnt/newtent/stk/pupa
     '';
     serviceConfig = {
       Type = "oneshot";
       User = "stk";
     };
+    environment = {
+      PASSPHRASE = "";
+    };
   };
-
-  # services.swayidle = {
-  #   enable = true;
-  #   events = [
-  #     {
-  #       event = "before-sleep";
-  #       command = "${pkgs.swaylock}/bin/swaylock -k";
-  #     }
-  #   ];
-  # };
 
   services.blueman.enable = true;
 
