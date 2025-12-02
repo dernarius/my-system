@@ -115,7 +115,7 @@
     inkscape
     kicad
     obs-studio
-    onlyoffice-bin
+    onlyoffice-desktopeditors
     pinentry-all
     postman
     trayscale
