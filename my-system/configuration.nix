@@ -54,6 +54,9 @@
   services.pipewire.enable = true;
   services.pulseaudio.enable = false;
 
+  hardware.ipu6.enable = true;
+  hardware.ipu6.platform = "ipu6ep";
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
