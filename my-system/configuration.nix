@@ -138,6 +138,7 @@
     uv
     zig
     zsh
+    ty
 
     # games
     lunar-client
